@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phong | My portfolio</title>
+    <!-- Comprehensive favicon support for all browsers -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico?v=2.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png?v=2.0">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png?v=2.0">
+    <link rel="shortcut icon" href="favicon.ico?v=2.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon.png?v=2.0">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loading-text">Welcome to my personal website</div>
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Space Background -->
+    <div class="space-bg"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <!-- Logo Section -->
+            <div class="logo-section">
+                <img src="images/logo.png" alt="Your Logo" class="logo-image">
+                <!-- Alternative: Text-based logo -->
+                <!-- <div class="logo-text">YourName</div> -->
+            </div>
+            
+            <a href="#" class="nav-item active" data-section="home">
+                <i>🏠</i> Home
+            </a>
+            <a href="#" class="nav-item" data-section="about">
+                <i>👤</i> About
+            </a>
+            <a href="#" class="nav-item" data-section="education">
+                <i>🎓</i> Education
+            </a>
+            <a href="#" class="nav-item" data-section="experience">
+                <i>💼</i> Experience
+            </a>
+            <a href="#" class="nav-item" data-section="skills">
+                <i>⚡</i> Skills
+            </a>
+            <a href="#" class="nav-item" data-section="projects">
+                <i>�</i> Projects
+            </a>
+            <a href="#" class="nav-item" data-section="extracurriculars">
+                <i>🎯</i> Extracurriculars
+            </a>
+            <a href="#" class="nav-item" data-section="contact">
+                <i>📧</i> Contact
+            </a>
+        </nav>
+
+        <!-- Content Area -->
+        <main class="content-area">
+            <!-- Home Section -->
+            <section id="home" class="content-section active">
+                <h1 class="section-title">Welcome to My World</h1>
+                <div class="section-content">
+                    <h2>Hello, I'm Hoang Phong</h2>
+                    <p>Welcome to my digital space! I'm a passionate developer exploring the infinite possibilities of technology. Just like traveling through space, every project is a new adventure, every line of code a new discovery.</p>
+                    <br>
+                    <p>Navigate through the sections to learn more about my journey, projects, and the technologies I work with. Let's explore the cosmos of creativity together!</p>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section id="about" class="content-section">
+                <h1 class="section-title">About Me</h1>
+                <div class="section-content">
+                    <h2>My Journey Through the Digital Cosmos</h2>
+                    <p>I am a dedicated developer with a passion for creating innovative solutions and exploring new technologies. My journey in programming began [X years ago], and since then, I've been constantly learning and evolving.</p>
+                    <br>
+                    <p>When I'm not coding, you can find me stargazing, reading about space exploration, or working on personal projects that push the boundaries of what's possible.</p>
+                    <br>
+                    <h3>What drives me:</h3>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Creating meaningful user experiences</li>
+                        <li>Solving complex problems with elegant solutions</li>
+                        <li>Continuous learning and growth</li>
+                        <li>Building technology that makes a difference</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Education Section -->
+            <section id="education" class="content-section">
+                <h1 class="section-title">Education</h1>
+                <div class="section-content">
+                    <div class="education-item">
+                        <h3>🎓 Bachelor's in Computer Science</h3>
+                        <p><strong>University Name</strong> | 2020 - 2024</p>
+                        <p>Focused on software development, algorithms, and data structures. Graduated with honors.</p>
+                    </div>
+                    <div class="education-item">
+                        <h3>📚 Full Stack Web Development</h3>
+                        <p><strong>Online Certification</strong> | 2023</p>
+                        <p>Comprehensive course covering modern web technologies including React, Node.js, and database management.</p>
+                        <p>10+ years experience with Rust toolchains and web frameworks (actix-web, axum, tokio, etc...)</p>
+                    </div>
+                    <div class="education-item">
+                        <h3>🔬 Space Technology Workshop</h3>
+                        <p><strong>NASA Educational Program</strong> | 2023</p>
+                        <p>Specialized training in space technology applications and satellite programming.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Experience Section -->
+            <section id="experience" class="content-section">
+                <h1 class="section-title">Experience</h1>
+                <div class="section-content">
+                    <div class="project-card">
+                        <h3>🏢 Software Engineering Intern</h3>
+                        <p><strong>Tech Company Name</strong> | Summer 2024</p>
+                        <p>Developed and maintained web applications using React and Node.js. Collaborated with senior developers on feature implementation and code reviews.</p>
+                        <p><strong>Key Achievements:</strong> Improved application performance by 25%, implemented 3 new user features</p>
+                        <p><strong>Technologies:</strong> React, Node.js, PostgreSQL, AWS</p>
+                        <button class="view-details-btn" data-project="intern-software">View Details</button>
+                    </div>
+                    <div class="project-card">
+                        <h3>🔬 Research Assistant</h3>
+                        <p><strong>University Research Lab</strong> | Spring 2024</p>
+                        <p>Assisted in machine learning research focused on natural language processing. Contributed to data collection, model training, and result analysis.</p>
+                        <p><strong>Key Achievements:</strong> Co-authored research paper, presented findings at student symposium</p>
+                        <p><strong>Technologies:</strong> Python, TensorFlow, Jupyter Notebooks, Git</p>
+                        <button class="view-details-btn" data-project="research-assistant">View Details</button>
+                    </div>
+                    <div class="project-card">
+                        <h3>💻 Frontend Developer Intern</h3>
+                        <p><strong>Startup Company</strong> | Summer 2023</p>
+                        <p>Built responsive web interfaces and implemented user experience improvements. Worked directly with design team to translate mockups into functional code.</p>
+                        <p><strong>Key Achievements:</strong> Reduced page load time by 40%, implemented mobile-first design approach</p>
+                        <p><strong>Technologies:</strong> HTML5, CSS3, JavaScript, Vue.js, Figma</p>
+                        <button class="view-details-btn" data-project="intern-frontend">View Details</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skills Section -->
+            <section id="skills" class="content-section">
+                <h1 class="section-title">Skills</h1>
+                <div class="section-content">
+                    <h3>Programming Languages</h3>
+                    <div class="skill-grid">
+                        <div class="skill-item">JavaScript</div>
+                        <div class="skill-item">Python</div>
+                        <div class="skill-item">Java</div>
+                        <div class="skill-item">C++</div>
+                        <div class="skill-item">TypeScript</div>
+                        <div class="skill-item">PHP</div>
+                    </div>
+                    
+                    <h3 style="margin-top: 30px;">Frameworks & Libraries</h3>
+                    <div class="skill-grid">
+                        <div class="skill-item">React</div>
+                        <div class="skill-item">Vue.js</div>
+                        <div class="skill-item">Node.js</div>
+                        <div class="skill-item">Express.js</div>
+                        <div class="skill-item">Three.js</div>
+                        <div class="skill-item">Bootstrap</div>
+                    </div>
+                    
+                    <h3 style="margin-top: 30px;">Tools & Technologies</h3>
+                    <div class="skill-grid">
+                        <div class="skill-item">Git</div>
+                        <div class="skill-item">Docker</div>
+                        <div class="skill-item">AWS</div>
+                        <div class="skill-item">MongoDB</div>
+                        <div class="skill-item">PostgreSQL</div>
+                        <div class="skill-item">Figma</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects Section -->
+            <section id="projects" class="content-section">
+                <h1 class="section-title">Projects</h1>
+                <div class="section-content">
+                    <div class="project-card">
+                        <h3>🚀 Space Explorer App</h3>
+                        <p>A web application that allows users to explore different planets and celestial bodies with interactive 3D models and real astronomical data.</p>
+                        <p><strong>Technologies:</strong> JavaScript, Three.js, NASA API</p>
+                        <button class="view-details-btn" data-project="space-explorer">View Details</button>
+                    </div>
+                    <div class="project-card">
+                        <h3>🌌 Galaxy Portfolio</h3>
+                        <p>A stunning portfolio website with space-themed animations and interactive elements. Features smooth transitions and responsive design.</p>
+                        <p><strong>Technologies:</strong> HTML5, CSS3, JavaScript</p>
+                        <button class="view-details-btn" data-project="galaxy-portfolio">View Details</button>
+                    </div>
+                    <div class="project-card">
+                        <h3>⭐ Stellar Task Manager</h3>
+                        <p>A productivity app with a cosmic theme that helps users organize their tasks with gamification elements and progress tracking.</p>
+                        <p><strong>Technologies:</strong> React, Node.js, MongoDB</p>
+                        <button class="view-details-btn" data-project="stellar-task">View Details</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Extracurriculars Section -->
+            <section id="extracurriculars" class="content-section">
+                <h1 class="section-title">Extracurriculars</h1>
+                <div class="section-content">
+                    <div class="project-card">
+                        <h3>🚀 Robotics Club</h3>
+                        <p><strong>Team Leader</strong> | 2022 - 2024</p>
+                        <p>Led a team of 8 students in designing and programming autonomous robots for competition. Our team won 2nd place in the Regional Robotics Championship.</p>
+                        <p><strong>Skills Developed:</strong> Leadership, Arduino Programming, 3D Design</p>
+                    </div>
+                    <div class="project-card">
+                        <h3>🎓 Computer Science Tutor</h3>
+                        <p><strong>Volunteer Position</strong> | 2023 - Present</p>
+                        <p>Provide free tutoring sessions for underclassmen in programming fundamentals, data structures, and algorithms. Helped over 50 students improve their grades.</p>
+                        <p><strong>Skills Developed:</strong> Communication, Teaching, Mentorship</p>
+                    </div>
+                    <div class="project-card">
+                        <h3>🌍 Hackathon Organizer</h3>
+                        <p><strong>Event Coordinator</strong> | 2023</p>
+                        <p>Organized the annual "Code for Good" hackathon with 200+ participants, focusing on solutions for environmental and social issues.</p>
+                        <p><strong>Skills Developed:</strong> Event Management, Public Speaking, Networking</p>
+                    </div>
+                    <div class="project-card">
+                        <h3>🎮 Game Development Club</h3>
+                        <p><strong>Vice President</strong> | 2022 - 2024</p>
+                        <p>Co-founded the Game Development Club, organizing workshops and game jams. Published 3 indie games on itch.io with the team.</p>
+                        <p><strong>Skills Developed:</strong> Unity, C#, Project Management, Creative Design</p>
+                    </div>
+                    <div class="project-card">
+                        <h3>📚 Open Source Contributor</h3>
+                        <p><strong>Active Contributor</strong> | 2023 - Present</p>
+                        <p>Regular contributor to various open-source projects on GitHub. Contributed to documentation, bug fixes, and new features for educational tools.</p>
+                        <p><strong>Skills Developed:</strong> Collaboration, Code Review, Version Control</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="content-section">
+                <h1 class="section-title">Contact</h1>
+                <div class="section-content">
+                    <h2>Let's Connect Across the Universe</h2>
+                    <p>Ready to collaborate on an out-of-this-world project? I'm always excited to discuss new opportunities and innovative ideas.</p>
+                    <br>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                        <div style="padding: 20px; background: rgba(153, 51, 255, 0.1); border-radius: 10px;">
+                            <h3>📧 Email</h3>
+                            <p>nguyenhoangphong170108@gmail.com</p>
+                        </div>
+                        <div style="padding: 20px; background: rgba(153, 51, 255, 0.1); border-radius: 10px;">
+                            <h3>💼 LinkedIn</h3>
+                            <p>linkedin.com/in/yourprofile</p>
+                        </div>
+                        <div style="padding: 20px; background: rgba(153, 51, 255, 0.1); border-radius: 10px;">
+                            <h3>🐙 GitHub</h3>
+                            <p>github.com/yourusername</p>
+                        </div>
+                        <div style="padding: 20px; background: rgba(153, 51, 255, 0.1); border-radius: 10px;">
+                            <h3>🌐 Portfolio</h3>
+                            <p>yourwebsite.com</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Project Detail Modal -->
+    <div id="project-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+            <div class="modal-body" id="modal-body">
+                <!-- Dynamic content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

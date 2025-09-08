@@ -1,0 +1,14 @@
+{
+    "name": "Phong | My portfolio",
+    "short_name": "Phong",
+    "icons": [
+        {
+            "src": "images/favicon.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#000000",
+    "background_color": "#000000",
+    "display": "standalone"
+}
