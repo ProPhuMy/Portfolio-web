@@ -2,7 +2,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const navItems = document.querySelectorAll('.nav-item');
     const sections = document.querySelectorAll('.content-section');
-    const logoLink = document.querySelector('.logo-link');
 
     navItems.forEach(item => {
         item.addEventListener('click', function(e) {
@@ -46,22 +45,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Make logo navigate to Home
-    if (logoLink) {
-        logoLink.style.cursor = 'pointer';
-        logoLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            const homeNav = document.querySelector('.nav-item[data-section="home"]');
-            if (homeNav) {
-                homeNav.click();
-            } else {
-                // Fallback: directly activate the section
-                sections.forEach(section => section.classList.remove('active'));
-                document.getElementById('home').classList.add('active');
-            }
-        });
-    }
-
     // Add some interactive stars on mouse move
     document.addEventListener('mousemove', function(e) {
         if (Math.random() > 0.95) {
@@ -74,7 +57,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalBody = document.getElementById('modal-body');
     const modalClose = document.querySelector('.modal-close');
     const viewDetailsButtons = document.querySelectorAll('.view-details-btn');
-    let lastFocusedElement = null;
 
     // Project data
     const projectData = {
@@ -139,25 +121,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             ]
         },
-        'portfolio-website': {
-            title: '🌐 Personal Portfolio Website',
-            overview: 'A space-themed single-page site with animated transitions and a project modal.',
-            description: `This website showcases my projects, skills, and activities with a clean UI, smooth section transitions, and a modal gallery system. Built from scratch with vanilla HTML, CSS, and JavaScript.`,
+        'intern-frontend': {
+            title: '💻 Frontend Developer Intern',
+            overview: 'Frontend-focused internship at an innovative startup, specializing in user interface development and performance optimization for web applications.',
+            description: `This internship provided intensive experience in modern frontend development within a startup environment. I worked directly with the design and product teams to create intuitive user interfaces while learning to balance rapid development cycles with code quality and user experience.`,
             features: [
-                'Sidebar navigation with animated section transitions',
-                'Project details modal with image lightbox',
-                'Responsive layout and touch-friendly controls',
-                'Optimized icons and manifest for basic PWA support'
+                'Built responsive web interfaces using Vue.js and modern CSS techniques',
+                'Implemented mobile-first design principles for optimal mobile experience',
+                'Collaborated with UX designers using Figma for design-to-code workflows',
+                'Optimized application performance through code splitting and lazy loading',
+                'Integrated with REST APIs and implemented state management solutions',
+                'Conducted cross-browser testing and accessibility improvements',
+                'Participated in user testing sessions and iterated based on feedback'
             ],
-            techStack: ['HTML5', 'CSS3', 'JavaScript'],
-            challenges: `Balancing visuals with performance on low-end devices; addressed via reduced initial animation delay and optimized background handling.`,
-            impact: 'Delivers a fast, engaging portfolio viewing experience across devices.',
+            techStack: ['Vue.js', 'JavaScript ES6+', 'CSS3', 'Sass', 'Webpack', 'Figma', 'Git', 'Chrome DevTools'],
+            challenges: `The biggest challenge was optimizing performance for users on slower internet connections while maintaining rich interactive features. I solved this by implementing progressive loading strategies, optimizing asset delivery, and using modern web performance techniques. Working in a fast-paced startup environment also required balancing speed of development with maintainable code practices.`,
+            impact: 'Reduced average page load time by 40%, implemented responsive design that increased mobile engagement by 60%, and contributed to 15% increase in user retention.',
             liveDemo: '#',
-            github: 'https://github.com/ProPhuMy/Portfolio-web',
-            images: [
-                { path: 'images/placeholder.svg', alt: 'Site preview 1', caption: 'Homepage layout' },
-                { path: 'images/placeholder.svg', alt: 'Site preview 2', caption: 'Projects modal' }
-            ]
+            github: '#',
+            images: ['Placeholder for interface screenshots']
         }
     };
 
@@ -168,7 +150,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const project = projectData[projectId];
             
             if (project) {
-                lastFocusedElement = this;
                 // Populate modal content
                 modalBody.innerHTML = `
                     <h1>${project.title}</h1>
@@ -179,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="project-gallery">
                         ${project.images.map((image, index) => `
                             <div class="gallery-item">
-                                <img src="${image.path}" alt="${image.alt}" class="gallery-image" onerror="this.onerror=null;this.src='images/placeholder.svg';" onclick="openImageModal('${image.path}', '${image.alt}')">
+                                <img src="${image.path}" alt="${image.alt}" class="gallery-image" onclick="openImageModal('${image.path}', '${image.alt}')">
                                 <p class="image-caption">${image.caption}</p>
                             </div>
                         `).join('')}
@@ -208,13 +189,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Show modal
                 modal.style.display = 'flex';
-                modal.setAttribute('role', 'dialog');
-                modal.setAttribute('aria-modal', 'true');
-                modal.setAttribute('aria-label', project.title);
                 setTimeout(() => {
                     modal.classList.add('active');
-                    // Move focus to close button for accessibility
-                    modalClose.focus();
                 }, 10);
                 
                 // Prevent body scroll
@@ -229,10 +205,6 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
-            // Return focus to last trigger
-            if (lastFocusedElement) {
-                lastFocusedElement.focus();
-            }
         }, 300);
     }
 
@@ -248,21 +220,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && modal.classList.contains('active')) {
             closeModal();
-            return;
-        }
-        // Basic focus trap when modal is open
-        if (modal.classList.contains('active') && e.key === 'Tab') {
-            const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-            const first = focusable[0];
-            const last = focusable[focusable.length - 1];
-            if (!focusable.length) return;
-            if (e.shiftKey && document.activeElement === first) {
-                last.focus();
-                e.preventDefault();
-            } else if (!e.shiftKey && document.activeElement === last) {
-                first.focus();
-                e.preventDefault();
-            }
         }
     });
 
@@ -274,7 +231,7 @@ document.addEventListener('DOMContentLoaded', function() {
         imageModal.innerHTML = `
             <div class="image-modal-content">
                 <button class="image-modal-close">&times;</button>
-                <img src="${imagePath}" alt="${imageAlt}" class="fullsize-image" onerror="this.onerror=null;this.src='images/placeholder.svg';">
+                <img src="${imagePath}" alt="${imageAlt}" class="fullsize-image">
                 <p class="fullsize-caption">${imageAlt}</p>
             </div>
         `;
