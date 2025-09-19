@@ -2,6 +2,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const navItems = document.querySelectorAll('.nav-item');
     const sections = document.querySelectorAll('.content-section');
+    const logoLink = document.querySelector('.logo-link');
 
     navItems.forEach(item => {
         item.addEventListener('click', function(e) {
@@ -57,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalBody = document.getElementById('modal-body');
     const modalClose = document.querySelector('.modal-close');
     const viewDetailsButtons = document.querySelectorAll('.view-details-btn');
+    let lastFocusedElement = null;
 
     // Project data
     const projectData = {
@@ -121,82 +123,96 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             ]
         },
-        'intern-frontend': {
-            title: '💻 Frontend Developer Intern',
-            overview: 'Frontend-focused internship at an innovative startup, specializing in user interface development and performance optimization for web applications.',
-            description: `This internship provided intensive experience in modern frontend development within a startup environment. I worked directly with the design and product teams to create intuitive user interfaces while learning to balance rapid development cycles with code quality and user experience.`,
+        'portfolio-website': {
+            title: '🌐 Personal Portfolio Website',
+            overview: 'A space-themed single-page site with animated transitions and a project modal.',
+            description: `This website showcases my projects, skills, and activities with a clean UI, smooth section transitions, and a modal gallery system. Built with vanilla HTML, CSS, and JavaScript.`,
             features: [
-                'Built responsive web interfaces using Vue.js and modern CSS techniques',
-                'Implemented mobile-first design principles for optimal mobile experience',
-                'Collaborated with UX designers using Figma for design-to-code workflows',
-                'Optimized application performance through code splitting and lazy loading',
-                'Integrated with REST APIs and implemented state management solutions',
-                'Conducted cross-browser testing and accessibility improvements',
-                'Participated in user testing sessions and iterated based on feedback'
+                'Sidebar navigation with animated section transitions',
+                'Project details modal with image lightbox',
+                'Responsive layout and touch-friendly controls',
+                'Basic PWA manifest and optimized icons'
             ],
-            techStack: ['Vue.js', 'JavaScript ES6+', 'CSS3', 'Sass', 'Webpack', 'Figma', 'Git', 'Chrome DevTools'],
-            challenges: `The biggest challenge was optimizing performance for users on slower internet connections while maintaining rich interactive features. I solved this by implementing progressive loading strategies, optimizing asset delivery, and using modern web performance techniques. Working in a fast-paced startup environment also required balancing speed of development with maintainable code practices.`,
-            impact: 'Reduced average page load time by 40%, implemented responsive design that increased mobile engagement by 60%, and contributed to 15% increase in user retention.',
+            techStack: ['HTML5', 'CSS3', 'JavaScript'],
+            challenges: `Balancing visuals with performance; reduced initial animation delay and added image fallbacks.`,
+            impact: 'Delivers a fast, engaging portfolio viewing experience across devices.',
             liveDemo: '#',
-            github: '#',
-            images: ['Placeholder for interface screenshots']
+            github: 'https://github.com/ProPhuMy/Portfolio-web',
+            images: [
+                { path: 'images/placeholder.svg', alt: 'Site preview 1', caption: 'Homepage layout' },
+                { path: 'images/placeholder.svg', alt: 'Site preview 2', caption: 'Projects modal' }
+            ]
         }
     };
 
-    // Open modal
-    viewDetailsButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const projectId = this.getAttribute('data-project');
-            const project = projectData[projectId];
-            
-            if (project) {
-                // Populate modal content
-                modalBody.innerHTML = `
-                    <h1>${project.title}</h1>
-                    <p class="project-overview"><strong>${project.overview}</strong></p>
-                    
-                    ${project.images && project.images.length > 0 ? `
-                    <h2>📸 Project Gallery</h2>
-                    <div class="project-gallery">
-                        ${project.images.map((image, index) => `
-                            <div class="gallery-item">
-                                <img src="${image.path}" alt="${image.alt}" class="gallery-image" onclick="openImageModal('${image.path}', '${image.alt}')">
-                                <p class="image-caption">${image.caption}</p>
-                            </div>
-                        `).join('')}
+    // Reusable modal opener
+    function openProjectModal(projectId, trigger) {
+        const project = projectData[projectId];
+        if (!project) {
+            console.warn('Unknown project id:', projectId);
+            return;
+        }
+        if (trigger) lastFocusedElement = trigger;
+        modalBody.innerHTML = `
+            <h1>${project.title}</h1>
+            <p class="project-overview"><strong>${project.overview}</strong></p>
+            ${project.images && project.images.length > 0 ? `
+            <h2>📸 Project Gallery</h2>
+            <div class="project-gallery">
+                ${project.images.map((image) => `
+                    <div class="gallery-item">
+                        <img src="${image.path}" alt="${image.alt}" class="gallery-image" onerror="this.onerror=null;this.src='images/placeholder.svg';">
+                        <p class="image-caption">${image.caption}</p>
                     </div>
-                    ` : ''}
-                    
-                    <h2>📋 Project Description</h2>
-                    <p>${project.description}</p>
-                    
-                    <h2>✨ Key Features</h2>
-                    <ul>
-                        ${project.features.map(feature => `<li>${feature}</li>`).join('')}
-                    </ul>
-                    
-                    <h2>🛠️ Technology Stack</h2>
-                    <div class="tech-stack">
-                        ${project.techStack.map(tech => `<span class="tech-item">${tech}</span>`).join('')}
-                    </div>
-                    
-                    <h2>🎯 Challenges & Solutions</h2>
-                    <p>${project.challenges}</p>
-                    
-                    <h2>🌟 Impact & Results</h2>
-                    <p>${project.impact}</p>
-                `;
-                
-                // Show modal
-                modal.style.display = 'flex';
-                setTimeout(() => {
-                    modal.classList.add('active');
-                }, 10);
-                
-                // Prevent body scroll
-                document.body.style.overflow = 'hidden';
-            }
+                `).join('')}
+            </div>
+            ` : ''}
+            <h2>📋 Project Description</h2>
+            <p>${project.description}</p>
+            <h2>✨ Key Features</h2>
+            <ul>
+                ${project.features.map(feature => `<li>${feature}</li>`).join('')}
+            </ul>
+            <h2>🛠️ Technology Stack</h2>
+            <div class="tech-stack">
+                ${project.techStack.map(tech => `<span class="tech-item">${tech}</span>`).join('')}
+            </div>
+            <h2>🎯 Challenges & Solutions</h2>
+            <p>${project.challenges}</p>
+            <h2>🌟 Impact & Results</h2>
+            <p>${project.impact}</p>
+        `;
+
+        modal.style.display = 'flex';
+        modal.setAttribute('role', 'dialog');
+        modal.setAttribute('aria-modal', 'true');
+        modal.setAttribute('aria-label', project.title);
+        setTimeout(() => {
+            modal.classList.add('active');
+            modalClose.focus();
+        }, 10);
+        document.body.style.overflow = 'hidden';
+
+        // Bind lightbox clicks
+        modalBody.querySelectorAll('.gallery-image').forEach(img => {
+            img.addEventListener('click', () => openImageModal(img.getAttribute('src'), img.getAttribute('alt')));
         });
+    }
+
+    // Direct button binding
+    viewDetailsButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            openProjectModal(this.getAttribute('data-project'), this);
+        });
+    });
+
+    // Delegated binding (resilient on Pages)
+    document.addEventListener('click', function(e) {
+        const btn = e.target.closest('.view-details-btn');
+        if (!btn) return;
+        e.preventDefault();
+        openProjectModal(btn.getAttribute('data-project'), btn);
     });
 
     // Close modal functions
@@ -205,6 +221,9 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
+            if (lastFocusedElement) {
+                lastFocusedElement.focus();
+            }
         }, 300);
     }
 
@@ -220,6 +239,21 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && modal.classList.contains('active')) {
             closeModal();
+            return;
+        }
+        // Focus trap
+        if (modal.classList.contains('active') && e.key === 'Tab') {
+            const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+            if (!focusable.length) return;
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+                last.focus();
+                e.preventDefault();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                first.focus();
+                e.preventDefault();
+            }
         }
     });
 
@@ -231,7 +265,7 @@ document.addEventListener('DOMContentLoaded', function() {
         imageModal.innerHTML = `
             <div class="image-modal-content">
                 <button class="image-modal-close">&times;</button>
-                <img src="${imagePath}" alt="${imageAlt}" class="fullsize-image">
+                <img src="${imagePath}" alt="${imageAlt}" class="fullsize-image" onerror="this.onerror=null;this.src='images/placeholder.svg';">
                 <p class="fullsize-caption">${imageAlt}</p>
             </div>
         `;
@@ -258,6 +292,21 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     };
+
+    // Logo navigates to Home
+    if (logoLink) {
+        logoLink.style.cursor = 'pointer';
+        logoLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            const homeNav = document.querySelector('.nav-item[data-section="home"]');
+            if (homeNav) {
+                homeNav.click();
+            } else {
+                sections.forEach(section => section.classList.remove('active'));
+                document.getElementById('home').classList.add('active');
+            }
+        });
+    }
 
     function createStar(x, y) {
         const star = document.createElement('div');
