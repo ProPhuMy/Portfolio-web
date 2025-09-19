@@ -13,6 +13,139 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#000000">
     <link href="styles.css" rel="stylesheet">
+    <style>
+        .contact-card {
+            padding: 20px;
+            background: rgba(153, 51, 255, 0.1);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            background: rgba(153, 51, 255, 0.2);
+            box-shadow: 0 10px 25px rgba(153, 51, 255, 0.3);
+        }
+        
+        .contact-link {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .profile-picture {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            float: right;
+            margin: 0 0 20px 20px;
+            object-fit: cover;
+            border: 4px solid rgba(153, 51, 255, 0.5);
+            box-shadow: 0 0 20px rgba(153, 51, 255, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .profile-picture:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(153, 51, 255, 0.5);
+        }
+        
+        /* Project Gallery Styles */
+        .project-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .gallery-item {
+            text-align: center;
+        }
+        
+        .gallery-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid rgba(153, 51, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-image:hover {
+            transform: scale(1.05);
+            border-color: rgba(153, 51, 255, 0.6);
+            box-shadow: 0 5px 20px rgba(153, 51, 255, 0.3);
+        }
+        
+        .image-caption {
+            margin-top: 10px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            font-style: italic;
+        }
+        
+        /* Image Modal Styles */
+        .image-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .image-modal-overlay.active {
+            opacity: 1;
+        }
+        
+        .image-modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            text-align: center;
+        }
+        
+        .fullsize-image {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(153, 51, 255, 0.3);
+        }
+        
+        .image-modal-close {
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            background: rgba(153, 51, 255, 0.8);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .image-modal-close:hover {
+            background: rgba(153, 51, 255, 1);
+            transform: scale(1.1);
+        }
+        
+        .fullsize-caption {
+            color: white;
+            margin-top: 15px;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
     <!-- Loading Screen -->
@@ -30,7 +163,9 @@
         <nav class="sidebar">
             <!-- Logo Section -->
             <div class="logo-section">
-                <img src="images/logo.png" alt="Your Logo" class="logo-image">
+                <a href="#" class="logo-link" data-section="home" aria-label="Go to Home">
+                    <img src="images/logo.png" alt="Home" class="logo-image">
+                </a>
                 <!-- Alternative: Text-based logo -->
                 <!-- <div class="logo-text">YourName</div> -->
             </div>
@@ -41,17 +176,11 @@
             <a href="#" class="nav-item" data-section="about">
                 <i>👤</i> About
             </a>
-            <a href="#" class="nav-item" data-section="education">
-                <i>🎓</i> Education
-            </a>
-            <a href="#" class="nav-item" data-section="experience">
-                <i>💼</i> Experience
-            </a>
             <a href="#" class="nav-item" data-section="skills">
                 <i>⚡</i> Skills
             </a>
             <a href="#" class="nav-item" data-section="projects">
-                <i>�</i> Projects
+                <i>🗂️</i> Projects
             </a>
             <a href="#" class="nav-item" data-section="extracurriculars">
                 <i>🎯</i> Extracurriculars
@@ -67,7 +196,7 @@
             <section id="home" class="content-section active">
                 <h1 class="section-title">Welcome to My World</h1>
                 <div class="section-content">
-                    <h2>Hello, I'm ProPhuMy</h2>
+                    <h2>Hello, I'm Phong!</h2>
                     <p>Welcome to my digital space! I'm a high school student exploring the infinite possibilities of technology, every project is a new adventure, every line of code is a new discovery.</p>
                     <br>
                     <p>Navigate through the sections to learn more about my journey, projects, and the technologies I work with. Let's explore the cosmos of creativity together!</p>
@@ -78,6 +207,7 @@
             <section id="about" class="content-section">
                 <h1 class="section-title">About Me</h1>
                 <div class="section-content">
+                    <img src="images/personal/profile.jpg" alt="Phong's Profile Picture" class="profile-picture" onerror="this.onerror=null;this.src='images/placeholder.svg';">
                     <h2>My Journey Through the Digital Cosmos</h2>
                     <p>Hi there! I'm a high school senior with an insatiable curiosity for the intersection of creativity and code. While most people see artificial intelligence as complex algorithms and data structures, I see it as the ultimate canvas for bringing wild ideas to life.</p>
                     <br>
@@ -90,92 +220,48 @@
                 </div>
             </section>
 
-            <!-- Education Section -->
-            <section id="education" class="content-section">
-                <h1 class="section-title">Education</h1>
-                <div class="section-content">
-                    <div class="education-item">
-                        <h3>🎓 Bachelor's in Computer Science</h3>
-                        <p><strong>University Name</strong> | 2020 - 2024</p>
-                        <p>Focused on software development, algorithms, and data structures. Graduated with honors.</p>
-                    </div>
-                    <div class="education-item">
-                        <h3>📚 Full Stack Web Development</h3>
-                        <p><strong>Online Certification</strong> | 2023</p>
-                        <p>Comprehensive course covering modern web technologies including React, Node.js, and database management.</p>
-                        <p>10+ years experience with Rust toolchain and web frameworks (actix-web, axum, tokio, etc...)</p>
-                    </div>
-                    <div class="education-item">
-                        <h3>🔬 Space Technology</h3>
-                        <p><strong>NASA Educational Program</strong> | 2023</p>
-                        <p>Specialized training in space technology applications and satellite programming.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Experience Section -->
-            <section id="experience" class="content-section">
-                <h1 class="section-title">Experience</h1>
-                <div class="section-content">
-                    <div class="project-card">
-                        <h3>🏢 Software Engineering Intern</h3>
-                        <p><strong>Tech Company Name</strong> | Summer 2024</p>
-                        <p>Developed and maintained web applications using React and Node.js. Collaborated with senior developers on feature implementation and code reviews.</p>
-                        <p><strong>Key Achievements:</strong> Improved application performance by 25%, implemented 3 new user features</p>
-                        <p><strong>Technologies:</strong> React, Node.js, PostgreSQL, AWS</p>
-                        <button class="view-details-btn" data-project="intern-software">View Details</button>
-                    </div>
-                    <div class="project-card">
-                        <h3>🔬 Research Assistant</h3>
-                        <p><strong>University Research Lab</strong> | Spring 2024</p>
-                        <p>Assisted in machine learning research focused on natural language processing. Contributed to data collection, model training, and result analysis.</p>
-                        <p><strong>Key Achievements:</strong> Co-authored research paper, presented findings at student symposium</p>
-                        <p><strong>Technologies:</strong> Python, TensorFlow, Jupyter Notebooks, Git</p>
-                        <button class="view-details-btn" data-project="research-assistant">View Details</button>
-                    </div>
-                    <div class="project-card">
-                        <h3>💻 Frontend Developer Intern</h3>
-                        <p><strong>Startup Company</strong> | Summer 2023</p>
-                        <p>Built responsive web interfaces and implemented user experience improvements. Worked directly with design team to translate mockups into functional code.</p>
-                        <p><strong>Key Achievements:</strong> Reduced page load time by 40%, implemented mobile-first design approach</p>
-                        <p><strong>Technologies:</strong> HTML5, CSS3, JavaScript, Vue.js, Figma</p>
-                        <button class="view-details-btn" data-project="intern-frontend">View Details</button>
-                    </div>
-                </div>
-            </section>
-
             <!-- Skills Section -->
             <section id="skills" class="content-section">
                 <h1 class="section-title">Skills</h1>
                 <div class="section-content">
                     <h3>Programming Languages</h3>
                     <div class="skill-grid">
-                        <div class="skill-item">JavaScript</div>
                         <div class="skill-item">Python</div>
                         <div class="skill-item">Java</div>
+                        <div class="skill-item">JavaScript</div>
                         <div class="skill-item">C++</div>
-                        <div class="skill-item">TypeScript</div>
-                        <div class="skill-item">PHP</div>
+                        <div class="skill-item">HTML/CSS</div>
+                        <div class="skill-item">SQL</div>
                     </div>
                     
-                    <h3 style="margin-top: 30px;">Frameworks & Libraries</h3>
+                    <h3 style="margin-top: 30px;">Technologies & Frameworks</h3>
                     <div class="skill-grid">
-                        <div class="skill-item">React</div>
-                        <div class="skill-item">Vue.js</div>
-                        <div class="skill-item">Node.js</div>
-                        <div class="skill-item">Express.js</div>
-                        <div class="skill-item">Three.js</div>
-                        <div class="skill-item">Bootstrap</div>
+                        <div class="skill-item">Machine Learning</div>
+                        <div class="skill-item">Artificial Intelligence</div>
+                        <div class="skill-item">IoT Development</div>
+                        <div class="skill-item">Data Analysis</div>
+                        <div class="skill-item">Embedded Systems</div>
+                        <div class="skill-item">Automation</div>
                     </div>
                     
-                    <h3 style="margin-top: 30px;">Tools & Technologies</h3>
+                    <h3 style="margin-top: 30px;">Tools & Platforms</h3>
                     <div class="skill-grid">
                         <div class="skill-item">Git</div>
-                        <div class="skill-item">Docker</div>
-                        <div class="skill-item">AWS</div>
-                        <div class="skill-item">MongoDB</div>
-                        <div class="skill-item">PostgreSQL</div>
-                        <div class="skill-item">Figma</div>
+                        <div class="skill-item">Arduino/Sensors</div>
+                        <div class="skill-item">NFC Technology</div>
+                        <div class="skill-item">Industry 4.0</div>
+                        <div class="skill-item">Environmental Monitoring</div>
+                        <div class="skill-item">Weather Prediction Systems</div>
+                    </div>
+                    
+                    <h3 style="margin-top: 30px;">Languages & Soft Skills</h3>
+                    <div class="skill-grid">
+                        <div class="skill-item">English (Fluent)</div>
+                        <div class="skill-item">Vietnamese (Native)</div>
+                        <div class="skill-item">Teaching & Mentoring</div>
+                        <div class="skill-item">Leadership</div>
+                        <div class="skill-item">Community Organizing</div>
+                        <div class="skill-item">Research & Analysis</div>
                     </div>
                 </div>
             </section>
@@ -185,22 +271,28 @@
                 <h1 class="section-title">Projects</h1>
                 <div class="section-content">
                     <div class="project-card">
-                        <h3>🚀 Space Explorer App</h3>
-                        <p>A web application that allows users to explore different planets and celestial bodies with interactive 3D models and real astronomical data.</p>
-                        <p><strong>Technologies:</strong> JavaScript, Three.js, NASA API</p>
-                        <button class="view-details-btn" data-project="space-explorer">View Details</button>
+                        <h3>🌡️ AI Weather Forecasting & IoT Control System</h3>
+                        <p>Developed a smart system integrating AI and IoT to collect environmental data through sensors for weather prediction and real-time monitoring. Features automated device control and energy optimization.</p>
+                        <p><strong>Key Features:</strong> Environmental data collection, LCD display interface, remote device control, automated operations for garage doors, window blinds, and irrigation systems</p>
+                        <p><strong>Technologies:</strong> AI, IoT, Embedded Systems, Environmental Sensors, Data Analysis</p>
+                        <p><strong>Date:</strong> July 2025</p>
+                        <button class="view-details-btn" data-project="ai-weather-iot">View Details</button>
                     </div>
                     <div class="project-card">
-                        <h3>🌌 Galaxy Portfolio</h3>
-                        <p>A stunning portfolio website with space-themed animations and interactive elements. Features smooth transitions and responsive design.</p>
-                        <p><strong>Technologies:</strong> HTML5, CSS3, JavaScript</p>
-                        <button class="view-details-btn" data-project="galaxy-portfolio">View Details</button>
+                        <h3>🔥 Forest Fire Prediction AI Model</h3>
+                        <p>Built an AI model to predict forest fire probability based on environmental factors including temperature, humidity, wind speed, and vegetation index. Supports prevention and emergency response efforts.</p>
+                        <p><strong>Impact:</strong> Enhanced forest fire prevention and response efficiency through predictive analytics</p>
+                        <p><strong>Technologies:</strong> Machine Learning, Environmental Data Analysis, Predictive Modeling, Data Science</p>
+                        <p><strong>Status:</strong> Research Project</p>
+                        <button class="view-details-btn" data-project="forest-fire-ai">View Details</button>
                     </div>
                     <div class="project-card">
-                        <h3>⭐ Stellar Task Manager</h3>
-                        <p>A productivity app with a cosmic theme that helps users organize their tasks with gamification elements and progress tracking.</p>
-                        <p><strong>Technologies:</strong> React, Node.js, MongoDB</p>
-                        <button class="view-details-btn" data-project="stellar-task">View Details</button>
+                        <h3>🌐 Personal Portfolio Website</h3>
+                        <p>A stunning space-themed portfolio website showcasing my projects, skills, and journey. Features interactive animations, responsive design, and smooth transitions.</p>
+                        <p><strong>Features:</strong> Space animations, interactive elements, responsive design, contact integration</p>
+                        <p><strong>Technologies:</strong> HTML5, CSS3, JavaScript, Web Design</p>
+                        <p><strong>Deployment:</strong> May 2025 (Regular updates every 4-5 months)</p>
+                        <button class="view-details-btn" data-project="portfolio-website">View Details</button>
                     </div>
                 </div>
             </section>
@@ -210,34 +302,37 @@
                 <h1 class="section-title">Extracurriculars</h1>
                 <div class="section-content">
                     <div class="project-card">
-                        <h3>🚀 Robotics Club</h3>
-                        <p><strong>Team Leader</strong> | 2022 - 2024</p>
-                        <p>Led a team of 8 students in designing and programming autonomous robots for competition. Our team won 2nd place in the Regional Robotics Championship.</p>
-                        <p><strong>Skills Developed:</strong> Leadership, Arduino Programming, 3D Design</p>
+                        <h3>🏆 Competitive Programming Achievements</h3>
+                        <p><strong>Multiple Awards</strong> | 2024 - 2025</p>
+                        <p>Bronze Medal at StemCo International Mathematics Competition (2024). Gold Medal in Hong Kong International Computational Competition - Python National level, Bronze Medal at International level (2025).</p>
+                        <p><strong>Skills Developed:</strong> Algorithmic Problem Solving, Mathematical Reasoning, Python Programming</p>
+                        <p><strong>SAT Score:</strong> 1540 | <strong>AP Scores:</strong> Calculus BC (5), Computer Science A (5), Physics C E&M (4)</p>
                     </div>
                     <div class="project-card">
-                        <h3>🎓 Computer Science Tutor</h3>
-                        <p><strong>Volunteer Position</strong> | 2023 - Present</p>
-                        <p>Provide free tutoring sessions for underclassmen in programming fundamentals, data structures, and algorithms. Helped over 50 students improve their grades.</p>
-                        <p><strong>Skills Developed:</strong> Communication, Teaching, Mentorship</p>
+                        <h3>❤️ Friends of Hue Foundation</h3>
+                        <p><strong>Organizer</strong> | 2024 - 2025</p>
+                        <p>Designed English curriculum for orphanage children, organized educational activities for underserved youth. Collaborated with local authorities to support elderly in ethnic communities through fundraising and supply donations.</p>
+                        <p><strong>Impact:</strong> Enhanced educational opportunities and community empowerment through cultural preservation initiatives</p>
+                        <p><strong>Skills Developed:</strong> Curriculum Design, Community Outreach, Cross-cultural Communication</p>
                     </div>
                     <div class="project-card">
-                        <h3>🌍 Hackathon Organizer</h3>
-                        <p><strong>Event Coordinator</strong> | 2023</p>
-                        <p>Organized the annual "Code for Good" hackathon with 200+ participants, focusing on solutions for environmental and social issues.</p>
-                        <p><strong>Skills Developed:</strong> Event Management, Public Speaking, Networking</p>
+                        <h3>🌱 Blossoming Minds Environmental Project</h3>
+                        <p><strong>Lead Organizer</strong> | October 2024</p>
+                        <p>Led environmental sustainability project in Thanh An Island focusing on shoreline cleanup. Delivered educational programs for children with disabilities at Thanh Tâm orphanage and organized Science Fair activities.</p>
+                        <p><strong>Impact:</strong> Raised and donated 13,000,000 VND for orphanage support while promoting environmental awareness</p>
+                        <p><strong>Skills Developed:</strong> Environmental Leadership, Special Needs Education, Fundraising, Scientific Program Development</p>
                     </div>
                     <div class="project-card">
-                        <h3>🎮 Game Development Club</h3>
-                        <p><strong>Vice President</strong> | 2022 - 2024</p>
-                        <p>Co-founded the Game Development Club, organizing workshops and game jams. Published 3 indie games on itch.io with the team.</p>
-                        <p><strong>Skills Developed:</strong> Unity, C#, Project Management, Creative Design</p>
+                        <h3>💻 CS Orientation & STEM Teaching</h3>
+                        <p><strong>Instructor & Mentor</strong> | Ongoing</p>
+                        <p>Teaching computer science and robotics to young students, creating motivation and encouraging exploration in STEM fields. Developed comprehensive STEM curriculum for different age groups.</p>
+                        <p><strong>Skills Developed:</strong> Teaching, Curriculum Development, Youth Mentoring, Technical Communication</p>
                     </div>
                     <div class="project-card">
-                        <h3>📚 Open Source Contributor</h3>
-                        <p><strong>Active Contributor</strong> | 2023 - Present</p>
-                        <p>Regular contributor to various open-source projects on GitHub. Contributed to documentation, bug fixes, and new features for educational tools.</p>
-                        <p><strong>Skills Developed:</strong> Collaboration, Code Review, Version Control</p>
+                        <h3>🏢 FPT & Saigon Hi-Tech Park Internship</h3>
+                        <p><strong>IT Trainee</strong> | July 2024</p>
+                        <p>Investigated motion and wave sensors, explored NFC technology implementation, and analyzed Industry 4.0 data transfer methods. Gained practical experience in modern technology applications.</p>
+                        <p><strong>Skills Developed:</strong> Sensor Technology, NFC Implementation, Industry 4.0 Knowledge, Data Analysis</p>
                     </div>
                 </div>
             </section>
@@ -250,19 +345,17 @@
                     <p>Ready to collaborate on an out-of-this-world project? I'm always excited to discuss new opportunities and innovative ideas.</p>
                     <br>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-                        <div style="padding: 20px; background: rgba(153, 51, 255, 0.1); border-radius: 10px;">
+                        <div class="contact-card">
                             <h3>📧 Email</h3>
-                            <p>nguyenhoangphong</p>
+                            <p>nguyenhoangphong170108@gmail.com</p>
                         </div>
-                        <div style="padding: 20px; background: rgba(153, 51, 255, 0.1); border-radius: 10px;">
-                            <h3>💼 LinkedIn</h3>
-                            <p>linkedin.com/in/yourprofile</p>
-                        </div>
-                        <div style="padding: 20px; background: rgba(153, 51, 255, 0.1); border-radius: 10px;">
-                            <h3>🐙 GitHub</h3>
-                            <p>github.com/yourusername</p>
-                        </div>
-                        <div style="padding: 20px; background: rgba(153, 51, 255, 0.1); border-radius: 10px;">
+                        <a href="https://github.com/ProPhuMy" target="_blank" rel="noopener noreferrer" class="contact-link">
+                            <div class="contact-card">
+                                <h3>🐙 GitHub</h3>
+                                <p>github.com/ProPhuMy</p>
+                            </div>
+                        </a>
+                        <div class="contact-card">
                             <h3>📞 Phone</h3>
                             <p>(+81)901-836-645</p>
                         </div>

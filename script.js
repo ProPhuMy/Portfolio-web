@@ -2,6 +2,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const navItems = document.querySelectorAll('.nav-item');
     const sections = document.querySelectorAll('.content-section');
+    const logoLink = document.querySelector('.logo-link');
 
     navItems.forEach(item => {
         item.addEventListener('click', function(e) {
@@ -45,6 +46,22 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Make logo navigate to Home
+    if (logoLink) {
+        logoLink.style.cursor = 'pointer';
+        logoLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            const homeNav = document.querySelector('.nav-item[data-section="home"]');
+            if (homeNav) {
+                homeNav.click();
+            } else {
+                // Fallback: directly activate the section
+                sections.forEach(section => section.classList.remove('active'));
+                document.getElementById('home').classList.add('active');
+            }
+        });
+    }
+
     // Add some interactive stars on mouse move
     document.addEventListener('mousemove', function(e) {
         if (Math.random() > 0.95) {
@@ -57,128 +74,90 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalBody = document.getElementById('modal-body');
     const modalClose = document.querySelector('.modal-close');
     const viewDetailsButtons = document.querySelectorAll('.view-details-btn');
+    let lastFocusedElement = null;
 
     // Project data
     const projectData = {
-        'space-explorer': {
-            title: '🚀 Space Explorer App',
-            overview: 'A comprehensive web application that transforms how users explore and learn about celestial bodies through immersive 3D experiences and real-time astronomical data.',
-            description: `The Space Explorer App is an interactive educational platform that brings the wonders of space directly to your browser. Using cutting-edge web technologies, users can journey through our solar system and beyond, exploring planets, moons, asteroids, and distant galaxies with unprecedented detail and scientific accuracy.`,
+        'ai-weather-iot': {
+            title: '🌡️ AI Weather Forecasting & IoT Control System',
+            overview: 'An intelligent environmental monitoring system that integrates artificial intelligence with IoT sensors to predict weather patterns and automate smart home devices.',
+            description: `This comprehensive smart system revolutionizes environmental monitoring by combining cutting-edge AI algorithms with IoT sensor networks. The system continuously collects environmental data including temperature, humidity, and air pressure to generate accurate weather predictions while simultaneously controlling connected devices to optimize energy efficiency and user comfort.`,
             features: [
-                'Interactive 3D planet models with realistic textures and lighting effects',
-                'Real-time astronomical data integration from NASA\'s public APIs',
-                'Virtual space travel with smooth camera transitions and orbital mechanics',
-                'Comprehensive educational content about each celestial body',
-                'Mobile-responsive design with intuitive touch controls',
-                'Augmented reality features for supported devices',
-                'Multi-language support for global accessibility'
+                'Real-time environmental data collection through multiple sensors',
+                'Machine learning models for accurate weather prediction and pattern analysis',
+                'LCD display interface showing live environmental readings and forecasts',
+                'Automated device control for garage doors, window blinds, and irrigation systems',
+                'Cloud-based data management platform for analysis and trends',
+                'Energy optimization algorithms reducing power consumption',
+                'Predictive maintenance alerts for connected devices and sensors'
             ],
-            techStack: ['JavaScript ES6+', 'Three.js', 'WebGL', 'NASA API', 'Node.js', 'Express.js', 'MongoDB', 'CSS3 Animations'],
-            challenges: `One of the primary technical challenges was optimizing 3D rendering performance across diverse devices and browsers. I implemented a sophisticated level-of-detail (LOD) system that dynamically adjusts mesh complexity based on viewing distance and device capabilities. Another significant challenge involved handling and processing large astronomical datasets efficiently, which I addressed through intelligent caching mechanisms and progressive data loading.`,
-            impact: 'Used by over 10,000 students worldwide, featured in NASA\'s educational resource directory, and adopted by 15+ schools for astronomy curriculum.',
-            liveDemo: '#',
+            techStack: ['Python', 'TensorFlow', 'Arduino', 'ESP 32'],
+            challenges: `The primary challenge was ensuring reliable data transmission between sensors and the central processing unit in various environmental conditions. I implemented robust error handling and data validation protocols to maintain system integrity.`,
+            impact: 'Successfully deployed in 3 test homes with 85% weather prediction accuracy, 30% reduction in energy consumption, and automated 95% of routine device operations.',
+            liveDemo: 'https://drive.google.com/file/d/1CsslgJ0qS7vsoAQza_9M0nQQ-4UAYvfw/view?usp=drive_link',
             github: '#',
-            images: ['Placeholder for screenshots']
+            images: [
+                {
+                    path: 'images/projects/ai-weather-iot/system-overview.jpg',
+                    alt: 'AI Weather IoT System Overview',
+                    caption: 'Complete system setup showing sensors, display, and connected devices'
+                },
+                {
+                    path: 'images/projects/ai-weather-iot/dashboard-interface.jpg',
+                    alt: 'Weather Dashboard Interface',
+                    caption: 'Real-time weather data dashboard with predictions and device controls'
+                }
+            ]
         },
-        'galaxy-portfolio': {
-            title: '🌌 Galaxy Portfolio',
-            overview: 'A visually stunning portfolio website that showcases creative work through space-themed animations and interactive elements, setting new standards for personal branding.',
-            description: `This portfolio represents the perfect fusion of artistic creativity and technical excellence. Built from the ground up with custom animations and interactive elements, it creates an immersive experience that tells a compelling professional story while maintaining optimal performance and accessibility.`,
+        'forest-fire-ai': {
+            title: '🔥 Forest Fire Prediction AI Model',
+            overview: 'Advanced machine learning system designed to predict forest fire probability using environmental data analysis, supporting prevention and emergency response efforts.',
+            description: `This research project focuses on developing a sophisticated AI model that analyzes multiple environmental factors to predict forest fire risks with high accuracy. By processing data from temperature sensors, humidity monitors, wind speed measurements,and vegetation indices, the system provides early warning capabilities that can significantly improve forest fire prevention and response strategies.`,
             features: [
-                'Custom CSS animations synchronized with scroll events',
-                'Interactive particle system creating dynamic backgrounds',
-                'Responsive design that adapts beautifully to all screen sizes',
-                'Progressive Web App (PWA) capabilities for offline access',
-                'Advanced loading states with custom skeletal UI',
-                'SEO-optimized with structured data markup',
-                'Accessibility compliance (WCAG 2.1 AA standards)'
+                'Multi-variable environmental data analysis including temperature, humidity, and wind patterns, etc',
+                'Historical fire data integration for improved prediction accuracy',
+                'Risk assessment mapping with geographical visualization capabilities',
+                'Real-time data processing from weather stations and environmental sensors',
+                'Integration with existing emergency response systems and protocols',
+                'Seasonal risk modeling accounting for climate change effects'
             ],
-            techStack: ['HTML5', 'CSS3', 'Vanilla JavaScript', 'GSAP', 'Intersection Observer API', 'Service Workers', 'Webpack'],
-            challenges: `The main challenge was creating smooth animations that work consistently across different browsers and devices while maintaining 60fps performance. I solved this by implementing hardware acceleration through CSS transforms and using the Intersection Observer API for efficient scroll-based animations. Another challenge was ensuring the creative design didn\'t compromise accessibility, which I addressed through careful color contrast management and comprehensive keyboard navigation.`,
-            impact: 'Achieved 98/100 Google Lighthouse score, resulted in 3 job offers, and has been featured in 5 design showcases.',
+            techStack: ['Python', 'Scikit-learn', 'Pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'Flask'],
+            challenges: `The most significant challenge was obtaining comprehensive training data that accurately represented diverse geographical and climatic conditions. I addressed this by combining multiple data sources including government weather databases and historical fire records. Another challenge involved balancing model sensitivity to minimize false positives while ensuring early detection of genuine fire risks, which required extensive hyperparameter tuning and cross-validation techniques.`,
+            impact: 'Achieved 97% prediction accuracy in testing phases, potential to reduce forest fire response time by 40%.',
             liveDemo: '#',
             github: '#',
-            images: ['Placeholder for screenshots']
+            images: [
+                {
+                    path: 'images/projects/forest-fire-ai/risk-assessment-map.jpg',
+                    alt: 'Forest Fire Risk Assessment Map',
+                    caption: 'AI-generated risk assessment map showing fire probability zones'
+                },
+                {
+                    path: 'images/projects/forest-fire-ai/model-performance.jpg',
+                    alt: 'Model Performance Analytics',
+                    caption: 'Machine learning model performance metrics and accuracy visualization'
+                }
+            ]
         },
-        'stellar-task': {
-            title: '⭐ Stellar Task Manager',
-            overview: 'A productivity application that gamifies task management through cosmic themes, helping users achieve their goals while exploring the universe of personal organization.',
-            description: `Stellar Task Manager reimagines productivity by combining effective task management principles with engaging gamification elements. Users embark on cosmic journeys as they complete tasks, unlock achievements, and build productive habits in an environment that makes work feel like exploration.`,
+        'portfolio-website': {
+            title: '🌐 Personal Portfolio Website',
+            overview: 'A space-themed single-page site with animated transitions and a project modal.',
+            description: `This website showcases my projects, skills, and activities with a clean UI, smooth section transitions, and a modal gallery system. Built from scratch with vanilla HTML, CSS, and JavaScript.`,
             features: [
-                'Gamified task completion with cosmic themes and rewards',
-                'Advanced progress tracking with visual analytics',
-                'Team collaboration features for shared projects',
-                'AI-powered task prioritization and scheduling suggestions',
-                'Cross-platform synchronization (web, mobile, desktop)',
-                'Customizable productivity methods (Pomodoro, GTD, etc.)',
-                'Integration with popular tools (Google Calendar, Slack, Trello)'
+                'Sidebar navigation with animated section transitions',
+                'Project details modal with image lightbox',
+                'Responsive layout and touch-friendly controls',
+                'Optimized icons and manifest for basic PWA support'
             ],
-            techStack: ['React', 'Redux Toolkit', 'Node.js', 'Express.js', 'MongoDB', 'Socket.io', 'JWT', 'Material-UI', 'Chart.js'],
-            challenges: `Building real-time collaboration features while maintaining data consistency across multiple users was complex. I implemented optimistic updates with conflict resolution strategies and used Socket.io for real-time synchronization. Another challenge was designing an AI system for task prioritization that actually helped users without being intrusive, which required extensive user testing and machine learning model fine-tuning.`,
-            impact: '5,000+ active users, 4.8/5 app store rating, and 40% improvement in user productivity metrics.',
+            techStack: ['HTML5', 'CSS3', 'JavaScript'],
+            challenges: `Balancing visuals with performance on low-end devices; addressed via reduced initial animation delay and optimized background handling.`,
+            impact: 'Delivers a fast, engaging portfolio viewing experience across devices.',
             liveDemo: '#',
-            github: '#',
-            images: ['Placeholder for screenshots']
-        },
-        'intern-software': {
-            title: '🏢 Software Engineering Intern',
-            overview: 'Full-stack development internship focused on building scalable web applications and learning industry best practices in a fast-paced tech environment.',
-            description: `During my software engineering internship, I worked on a cross-functional team developing customer-facing web applications. This experience provided hands-on exposure to enterprise-level software development, agile methodologies, and collaborative coding practices used in the industry.`,
-            features: [
-                'Developed responsive web components using React and modern JavaScript',
-                'Built RESTful APIs with Node.js and Express framework',
-                'Implemented database optimization strategies for PostgreSQL',
-                'Participated in code reviews and maintained high coding standards',
-                'Collaborated with UX/UI designers to implement pixel-perfect interfaces',
-                'Wrote comprehensive unit tests achieving 90%+ code coverage',
-                'Deployed applications using AWS services and Docker containers'
-            ],
-            techStack: ['React', 'Node.js', 'Express.js', 'PostgreSQL', 'AWS', 'Docker', 'Jest', 'Git', 'Jira'],
-            challenges: `The main challenge was adapting to a large existing codebase with complex business logic and multiple integrations. I overcame this by systematically studying the architecture documentation, setting up comprehensive debugging environments, and working closely with senior developers. Another challenge was optimizing database queries for large datasets, which I solved by implementing proper indexing strategies and query optimization techniques.`,
-            impact: 'Delivered 3 major features used by 50,000+ users, improved application performance by 25%, and received offer for full-time position upon graduation.',
-            liveDemo: '#',
-            github: '#',
-            images: ['Placeholder for screenshots']
-        },
-        'research-assistant': {
-            title: '🔬 Research Assistant - NLP Lab',
-            overview: 'Academic research position focused on advancing natural language processing techniques and contributing to cutting-edge machine learning research.',
-            description: `As a research assistant in the university\'s Natural Language Processing lab, I contributed to groundbreaking research on improving language model efficiency and accuracy. This role involved both independent research and collaboration with graduate students and faculty on publishable research.`,
-            features: [
-                'Conducted literature reviews on transformer architectures and attention mechanisms',
-                'Implemented and fine-tuned BERT and GPT models for specific NLP tasks',
-                'Developed data preprocessing pipelines for large text corpora',
-                'Created evaluation metrics and benchmarking systems for model performance',
-                'Contributed to research paper writing and statistical analysis',
-                'Presented findings at student research symposium and lab meetings',
-                'Mentored undergraduate students in machine learning fundamentals'
-            ],
-            techStack: ['Python', 'TensorFlow', 'PyTorch', 'Transformers', 'Pandas', 'NumPy', 'Jupyter', 'LaTeX', 'Git'],
-            challenges: `Working with large language models required significant computational resources and optimization. I learned to implement efficient training strategies, including gradient accumulation and mixed precision training. Another challenge was reproducing results from academic papers, which taught me the importance of rigorous experimental design and documentation.`,
-            impact: 'Co-authored research paper accepted to undergraduate symposium, contributed to lab\'s publication pipeline, and gained deep expertise in modern NLP techniques.',
-            liveDemo: '#',
-            github: '#',
-            images: ['Placeholder for research visualizations']
-        },
-        'intern-frontend': {
-            title: '💻 Frontend Developer Intern',
-            overview: 'Frontend-focused internship at an innovative startup, specializing in user interface development and performance optimization for web applications.',
-            description: `This internship provided intensive experience in modern frontend development within a startup environment. I worked directly with the design and product teams to create intuitive user interfaces while learning to balance rapid development cycles with code quality and user experience.`,
-            features: [
-                'Built responsive web interfaces using Vue.js and modern CSS techniques',
-                'Implemented mobile-first design principles for optimal mobile experience',
-                'Collaborated with UX designers using Figma for design-to-code workflows',
-                'Optimized application performance through code splitting and lazy loading',
-                'Integrated with REST APIs and implemented state management solutions',
-                'Conducted cross-browser testing and accessibility improvements',
-                'Participated in user testing sessions and iterated based on feedback'
-            ],
-            techStack: ['Vue.js', 'JavaScript ES6+', 'CSS3', 'Sass', 'Webpack', 'Figma', 'Git', 'Chrome DevTools'],
-            challenges: `The biggest challenge was optimizing performance for users on slower internet connections while maintaining rich interactive features. I solved this by implementing progressive loading strategies, optimizing asset delivery, and using modern web performance techniques. Working in a fast-paced startup environment also required balancing speed of development with maintainable code practices.`,
-            impact: 'Reduced average page load time by 40%, implemented responsive design that increased mobile engagement by 60%, and contributed to 15% increase in user retention.',
-            liveDemo: '#',
-            github: '#',
-            images: ['Placeholder for interface screenshots']
+            github: 'https://github.com/ProPhuMy/Portfolio-web',
+            images: [
+                { path: 'images/placeholder.svg', alt: 'Site preview 1', caption: 'Homepage layout' },
+                { path: 'images/placeholder.svg', alt: 'Site preview 2', caption: 'Projects modal' }
+            ]
         }
     };
 
@@ -189,10 +168,23 @@ document.addEventListener('DOMContentLoaded', function() {
             const project = projectData[projectId];
             
             if (project) {
+                lastFocusedElement = this;
                 // Populate modal content
                 modalBody.innerHTML = `
                     <h1>${project.title}</h1>
                     <p class="project-overview"><strong>${project.overview}</strong></p>
+                    
+                    ${project.images && project.images.length > 0 ? `
+                    <h2>📸 Project Gallery</h2>
+                    <div class="project-gallery">
+                        ${project.images.map((image, index) => `
+                            <div class="gallery-item">
+                                <img src="${image.path}" alt="${image.alt}" class="gallery-image" onerror="this.onerror=null;this.src='images/placeholder.svg';" onclick="openImageModal('${image.path}', '${image.alt}')">
+                                <p class="image-caption">${image.caption}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
                     
                     <h2>📋 Project Description</h2>
                     <p>${project.description}</p>
@@ -212,17 +204,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     <h2>🌟 Impact & Results</h2>
                     <p>${project.impact}</p>
-                    
-                    <div class="modal-links">
-                        <a href="${project.liveDemo}" class="modal-link" target="_blank">🚀 Live Demo</a>
-                        <a href="${project.github}" class="modal-link" target="_blank">📁 GitHub Repository</a>
-                    </div>
                 `;
                 
                 // Show modal
                 modal.style.display = 'flex';
+                modal.setAttribute('role', 'dialog');
+                modal.setAttribute('aria-modal', 'true');
+                modal.setAttribute('aria-label', project.title);
                 setTimeout(() => {
                     modal.classList.add('active');
+                    // Move focus to close button for accessibility
+                    modalClose.focus();
                 }, 10);
                 
                 // Prevent body scroll
@@ -237,6 +229,10 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
+            // Return focus to last trigger
+            if (lastFocusedElement) {
+                lastFocusedElement.focus();
+            }
         }, 300);
     }
 
@@ -252,8 +248,59 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && modal.classList.contains('active')) {
             closeModal();
+            return;
+        }
+        // Basic focus trap when modal is open
+        if (modal.classList.contains('active') && e.key === 'Tab') {
+            const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            if (!focusable.length) return;
+            if (e.shiftKey && document.activeElement === first) {
+                last.focus();
+                e.preventDefault();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                first.focus();
+                e.preventDefault();
+            }
         }
     });
+
+    // Image modal functionality
+    window.openImageModal = function(imagePath, imageAlt) {
+        // Create image modal overlay
+        const imageModal = document.createElement('div');
+        imageModal.className = 'image-modal-overlay';
+        imageModal.innerHTML = `
+            <div class="image-modal-content">
+                <button class="image-modal-close">&times;</button>
+                <img src="${imagePath}" alt="${imageAlt}" class="fullsize-image" onerror="this.onerror=null;this.src='images/placeholder.svg';">
+                <p class="fullsize-caption">${imageAlt}</p>
+            </div>
+        `;
+        
+        document.body.appendChild(imageModal);
+        
+        // Show image modal
+        setTimeout(() => {
+            imageModal.classList.add('active');
+        }, 10);
+        
+        // Close image modal functionality
+        const closeImageModal = () => {
+            imageModal.classList.remove('active');
+            setTimeout(() => {
+                document.body.removeChild(imageModal);
+            }, 300);
+        };
+        
+        imageModal.querySelector('.image-modal-close').addEventListener('click', closeImageModal);
+        imageModal.addEventListener('click', function(e) {
+            if (e.target === imageModal) {
+                closeImageModal();
+            }
+        });
+    };
 
     function createStar(x, y) {
         const star = document.createElement('div');
