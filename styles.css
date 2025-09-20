@@ -127,7 +127,7 @@ body {
     right: 0;
     width: 84vw; /* adjust the portion of screen showing the GIF */
     height: 100vh;
-    background: url('background.gif') center/cover no-repeat;
+    background: url('background.gif?v=2025-09-20-1') center/cover no-repeat;
     pointer-events: none;
     z-index: 0; /* behind content but above page background */
 }
