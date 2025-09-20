@@ -82,14 +82,14 @@ document.addEventListener('DOMContentLoaded', function() {
             github: '#',
             images: [
                 {
-                    path: 'images/projects/ai-weather-iot/system-overview.jpg',
+                    path: 'images/projects/ai-weather-iot/setup.jpg',
                     alt: 'AI Weather IoT System Overview',
                     caption: 'Complete system setup showing sensors, display, and connected devices'
                 },
                 {
-                    path: 'images/projects/ai-weather-iot/dashboard-interface.jpg',
+                    path: 'images/projects/ai-weather-iot/ui.png',
                     alt: 'Weather Dashboard Interface',
-                    caption: 'Real-time weather data dashboard with predictions and device controls'
+                    caption: 'Real-time weather data dashboard.'
                 }
             ]
         },
@@ -112,14 +112,14 @@ document.addEventListener('DOMContentLoaded', function() {
             github: '#',
             images: [
                 {
-                    path: 'images/projects/forest-fire-ai/risk-assessment-map.jpg',
-                    alt: 'Forest Fire Risk Assessment Map',
-                    caption: 'AI-generated risk assessment map showing fire probability zones'
+                    path: 'images/projects/forest-fire-ai/main-web.png',
+                    alt: 'Website UI',
+                    caption: 'Website where people input indices to get the predictions.'
                 },
                 {
-                    path: 'images/projects/forest-fire-ai/model-performance.jpg',
-                    alt: 'Model Performance Analytics',
-                    caption: 'Machine learning model performance metrics and accuracy visualization'
+                    path: 'images/projects/forest-fire-ai/dashboard.png',
+                    alt: 'Dashboard',
+                    caption: 'Dashboard for data visualization and storing.'
                 }
             ]
         },
@@ -139,8 +139,29 @@ document.addEventListener('DOMContentLoaded', function() {
             liveDemo: '#',
             github: 'https://github.com/ProPhuMy/Portfolio-web',
             images: [
-                { path: 'images/placeholder.svg', alt: 'Site preview 1', caption: 'Homepage layout' },
-                { path: 'images/placeholder.svg', alt: 'Site preview 2', caption: 'Projects modal' }
+                { path: 'images/projects/personal-web/homepage.png', alt: 'Site preview 1', caption: 'Homepage layout' },
+                { path: 'images/projects/personal-web/project.png', alt: 'Site preview 2', caption: 'Projects modal' }
+            ]
+        },
+        'desktop-cat': {
+            title: '🐱 Desktop Cat Assistant',
+            overview: 'A desktop companion app with animated cat GIFs and conversational AI integration.',
+            description: `A playful Tkinter desktop overlay that uses the Gemini API to chat. The cat switches GIFs based on mood (idle, happy, thinking) and reacts to user commands (e.g., greet, tell a joke, sit on the taskbar).`,
+            features: [
+                'Always-on-top Tkinter window with transparent background',
+                'Gemini-powered chat responses with simple memory',
+                'Mood/state engine controlling GIF animations',
+                'Quick commands'
+            ],
+            techStack: ['Python', 'Tkinter', 'Gemini API', 'GIF'],
+            challenges: `Keeping animations smooth in Tkinter while handling async API calls; solved using lightweight threading/queueing and frame-timed updates.`,
+            impact: 'A delightful companion that showcases creativity and UI tinkering.',
+            liveDemo: '#',
+            github: '#',
+            fun: true,
+            images: [
+                { path: 'images/projects/desktop-cat/idle.png', alt: 'Idle cat', caption: 'Idle animation' },
+                { path: 'images/projects/desktop-cat/box.png', alt: 'Conversations', caption: 'Chat box' }
             ]
         }
     };
@@ -155,6 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (trigger) lastFocusedElement = trigger;
         modalBody.innerHTML = `
             <h1>${project.title}</h1>
+            ${project.fun ? '<p><span class="badge badge-fun">Just for fun</span></p>' : ''}
             <p class="project-overview"><strong>${project.overview}</strong></p>
             ${project.images && project.images.length > 0 ? `
             <h2>📸 Project Gallery</h2>
