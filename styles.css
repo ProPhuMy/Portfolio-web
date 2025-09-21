@@ -10,13 +10,30 @@ html {
 }
 
 html, body {
-    font-family: 'Arial', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", "DejaVu Sans", "Cantarell", Ubuntu, sans-serif;
+    line-height: 1.6;
     background: linear-gradient(135deg, #000 0%, #111 30%, #000 70%, #000 100%);
     color: #fff;
     overflow-x: hidden;
     width: 100%;
     max-width: 100%;
 }
+
+/* Global text rhythm */
+p { margin: 0 0 0.75rem; }
+p, li { line-height: 1.7; }
+
+/* Constrain long text lines for readability (not in cards) */
+.section-content p { max-width: none; }
+.section-content p:last-child { margin-bottom: 0; }
+.modal-body p { max-width: 70ch; }
+
+/* Let card text take full width */
+.project-card p, .education-item p { max-width: none; }
+
+/* Headings spacing within sections */
+.section-content h2 { margin: 0 0 0.5rem; }
+.section-content h3 { margin: 0.8rem 0 0.4rem; }
 
 /* Dark overlay for better readability */
 body::after {
@@ -47,25 +64,16 @@ body {
     outline-offset: 2px;
 }
 
-/* Hide scrollbars completely */
-::-webkit-scrollbar {
-    width: 0px;
-    background: transparent;
+/* Page scrollbar styling (visible) */
+body::-webkit-scrollbar { width: 12px; }
+body::-webkit-scrollbar-track { background: #000; }
+body::-webkit-scrollbar-thumb {
+    background: #4a0fa8; /* even darker purple */
+    border-radius: 10px;
+    border: 2px solid #000;
 }
-
-::-webkit-scrollbar-thumb {
-    background: transparent;
-}
-
-/* For Firefox */
-html {
-    scrollbar-width: none;
-}
-
-/* For Internet Explorer and Edge */
-body {
-    -ms-overflow-style: none;
-}
+body::-webkit-scrollbar-thumb:hover { background: #5a13c1; }
+body::-webkit-scrollbar-corner { background: #000; }
 
 
 /* Loading Animation */
@@ -194,6 +202,12 @@ body {
     z-index: 1000;
 }
 
+/* Hide sidebar scrollbar but keep it scrollable */
+.sidebar::-webkit-scrollbar { width: 0; height: 0; }
+.sidebar { -ms-overflow-style: none; /* IE/Edge */ }
+/* Firefox-only property; ignored elsewhere */
+/* Firefox shows default sidebar scrollbar; acceptable for compatibility */
+
 /* Logo Section Styles */
 .logo-section {
     padding: 20px 30px 40px 30px;
@@ -262,11 +276,12 @@ body {
 .content-area {
     margin-left: 250px;
     flex: 1;
-    padding: 40px;
+    padding: 28px 40px 40px;
     min-height: 100vh;
     width: calc(100% - 250px);
     max-width: calc(100% - 250px);
     overflow-x: hidden;
+    overflow-y: auto; /* allow page/content to scroll */
 }
 
 .content-section {
@@ -277,6 +292,8 @@ body {
 .content-section.active {
     display: block;
 }
+
+/* Remove section-specific scrollbar styling; use page default */
 
 @keyframes slideInFromBottom {
     from {
@@ -313,7 +330,7 @@ body {
 
 .section-title {
     font-size: 3rem;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
     background: rgba(0, 0, 0, 0.8);
     color: #9933ff;
     -webkit-text-fill-color: #9933ff;
@@ -334,7 +351,7 @@ body {
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 15px;
-    padding: 30px;
+    padding: 22px 30px 30px;
     margin-bottom: 30px;
     color: #ffffff;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
@@ -344,11 +361,66 @@ body {
     background: rgba(0, 0, 0, 0.8);
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 10px;
-    padding: 20px;
+    padding: 16px 20px 20px;
     margin-bottom: 20px;
     transition: transform 0.3s ease;
     color: #ffffff;
 }
+
+/* Remove extra top gap inside cards */
+.project-card h3,
+.education-item h3 { margin: 0 0 8px; }
+.project-card > :first-child,
+.education-item > :first-child { margin-top: 0; }
+
+.bullets{
+    margin-left: 30px;
+}
+
+.h3-font-size{
+    font-size: 23px;
+}
+
+/* Square card layout for Projects and Extracurriculars */
+#projects .section-content,
+#extracurriculars .section-content {
+    display: block; /* Reverted: use natural document flow for cards; grid removed */
+}
+
+#projects .section-content .project-card,
+#extracurriculars .section-content .project-card {
+    overflow: hidden;
+    display: block;
+    margin-bottom: 20px;
+}
+
+/* Make titles compact, keep badges aligned */
+#projects .section-content .project-card h3,
+#extracurriculars .section-content .project-card h3 {
+    margin-bottom: 8px;
+}
+
+#projects .section-content .project-card .badge,
+#extracurriculars .section-content .project-card .badge {
+    align-self: flex-start;
+    margin-bottom: 8px;
+}
+
+/* Clamp text so content fits inside the square */
+#projects .section-content .project-card p,
+#extracurriculars .section-content .project-card p {
+    display: block;
+    overflow-wrap: break-word;
+    word-break: normal;
+}
+
+/* Keep action at the bottom of the square */
+#projects .section-content .project-card .view-details-btn,
+#extracurriculars .section-content .project-card .view-details-btn {
+    margin-top: 15px;
+}
+
+/* Removed square grid mobile overrides */
 
 .project-card:hover, .education-item:hover {
     transform: translateY(-5px);
@@ -435,6 +507,17 @@ body {
     transform: scale(0.9);
     transition: transform 0.3s ease;
 }
+
+/* Modal scrollbar styling to match page */
+.modal-content::-webkit-scrollbar { width: 12px; }
+.modal-content::-webkit-scrollbar-track { background: #000; }
+.modal-content::-webkit-scrollbar-thumb {
+    background: #4a0fa8;
+    border-radius: 10px;
+    border: 2px solid #000;
+}
+.modal-content::-webkit-scrollbar-thumb:hover { background: #5a13c1; }
+.modal-content::-webkit-scrollbar-corner { background: #000; }
 
 .modal-overlay.active .modal-content {
     transform: scale(1);
@@ -540,6 +623,18 @@ body {
     font-weight: 600;
     letter-spacing: 0.3px;
 }
+
+/* Contact grid layout (moved from inline styles) */
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* Utility helpers (replace inline styles) */
+.mt-30 { margin-top: 30px !important; }
+.fs-22 { font-size: 22px !important; }
+.fs-19 { font-size: 19px !important; }
 
 .badge-fun {
     border-color: rgba(255, 102, 204, 0.6);
