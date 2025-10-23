@@ -62,24 +62,57 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Project data
     const projectData = {
+        'pothole-app': {
+            title: '🚗 AI-Powered Pothole Detection and Mapping App',
+            overview: 'A cross-platform mobile application that detects and maps potholes in real-time, helping drivers navigate safer routes and alerting authorities to road damage.',
+            description: `This innovative mobile application combines computer vision and mapping technology to create a comprehensive pothole detection and navigation system. Using a YOLO-based deep learning model trained on extensive datasets, the app identifies road damage in real-time through the device's camera. The system integrates with OpenStreetMap to provide route optimization, allowing drivers to avoid hazardous areas while simultaneously building a crowdsourced database of road conditions. Firebase backend ensures real-time synchronization across all users, creating a collaborative approach to road safety.`,
+            features: [
+                'Real-time pothole detection using YOLO deep learning model with ~80% accuracy',
+                'Cross-platform mobile app built with React Native for iOS and Android',
+                'OpenStreetMap API integration for route visualization and navigation',
+                'Shortest-path algorithms to optimize routes and avoid detected potholes',
+                'Real-time hazard alerts notifying drivers of upcoming road damage',
+                'Firebase Firestore database for real-time data synchronization',
+                'Cloud Storage integration for storing detection images and metadata',
+                'Cloud Functions for serverless backend processing and data aggregation',
+                'Crowdsourced reporting system improving detection accuracy over time',
+                'Dashboard for authorities to view and prioritize road maintenance'
+            ],
+            techStack: ['React Native', 'Flask', 'YOLO', 'Python', 'Firebase', 'Firestore', 'Cloud Storage', 'Cloud Functions', 'OpenStreetMap API', 'Machine Learning', 'Computer Vision'],
+            challenges: `The primary challenge was achieving reliable pothole detection across varying lighting conditions, camera angles, and road types. I addressed this by fine-tuning the YOLO model on a diverse dataset combining online repositories and locally collected data, incorporating data augmentation techniques to improve model robustness. Another significant challenge was optimizing real-time processing on mobile devices with limited computational resources, which required implementing efficient model compression and asynchronous processing pipelines. Integrating the shortest-path algorithm with real-time hazard data also required careful optimization to ensure responsive navigation updates without excessive battery drain.`,
+            impact: 'Currently in active development with pilot testing planned for local communities. The app has the potential to significantly reduce vehicle damage from potholes and help municipalities prioritize road maintenance efforts based on real-world data.',
+            images: [
+                {
+                    path: 'images/projects/pothole-detection/potholes.png',
+                    alt: 'Pothole Detection Interface',
+                    caption: 'Real-time pothole detection'
+                },
+                {
+                    path: 'images/projects/pothole-detection/map.png',
+                    alt: 'Route Mapping System',
+                    caption: 'Interactive map showing detected potholes and optimized routes'
+                }
+            ]
+        },
         'ai-weather-iot': {
             title: '🌡️ AI Weather Forecasting & IoT Control System',
-            overview: 'An intelligent environmental monitoring system that integrates artificial intelligence with IoT sensors to predict weather patterns and automate smart home devices.',
-            description: `This comprehensive smart system revolutionizes environmental monitoring by combining cutting-edge AI algorithms with IoT sensor networks. The system continuously collects environmental data including temperature, humidity, and air pressure to generate accurate weather predictions while simultaneously controlling connected devices to optimize energy efficiency and user comfort.`,
+            overview: 'Application of Artificial Intelligence and IoT in Weather Forecasting and Device Control - A smart system integrating AI and IoT to predict weather patterns and automate home devices.',
+            description: `This comprehensive smart system integrates artificial intelligence with IoT sensor networks to revolutionize environmental monitoring and home automation. The system continuously collects and analyzes environmental data including temperature, humidity, and air pressure through multiple sensors to generate accurate weather predictions. Beyond monitoring, the platform features an LCD-based interface for real-time data visualization and implements sophisticated device automation to improve energy efficiency and reduce manual operation. The data transmission platform enables remote analysis and automated decision-making, creating a seamless integration between environmental sensing, AI-powered forecasting, and practical home automation applications.`,
             features: [
-                'Real-time environmental data collection through multiple sensors',
-                'Machine learning models for accurate weather prediction and pattern analysis',
-                'LCD display interface showing live environmental readings and forecasts',
-                'Automated device control for garage doors, window blinds, and irrigation systems',
-                'Cloud-based data management platform for analysis and trends',
-                'Energy optimization algorithms reducing power consumption',
-                'Predictive maintenance alerts for connected devices and sensors'
+                'Real-time environmental data collection (temperature, humidity, air pressure)',
+                'AI and machine learning models for weather prediction and pattern analysis',
+                'LCD-based interface for live environmental readings and forecasts',
+                'Data transmission platform for remote analysis and monitoring',
+                'Automated decision-making based on environmental conditions',
+                'Device automation for garage doors, window blinds, and irrigation systems',
+                'Energy efficiency optimization reducing power consumption',
+                'Embedded systems integration for reliable sensor data collection',
+                'Remote control capabilities for connected smart home devices',
+                'Predictive algorithms for environmental management and sustainable living'
             ],
-            techStack: ['Python', 'TensorFlow', 'Arduino', 'ESP 32'],
-            challenges: `The primary challenge was ensuring reliable data transmission between sensors and the central processing unit in various environmental conditions. I implemented robust error handling and data validation protocols to maintain system integrity.`,
-            impact: 'Successfully deployed in 3 test homes with 85% weather prediction accuracy, 30% reduction in energy consumption, and automated 95% of routine device operations.',
-            liveDemo: 'https://drive.google.com/file/d/1CsslgJ0qS7vsoAQza_9M0nQQ-4UAYvfw/view?usp=drive_link',
-            github: '#',
+            techStack: ['Python', 'Machine Learning', 'TensorFlow', 'Arduino', 'ESP32', 'IoT Sensors', 'Embedded Systems', 'LCD Display', 'Data Analysis'],
+            challenges: `The primary challenge was ensuring reliable data transmission between multiple sensors and the central processing unit across various environmental conditions while maintaining real-time responsiveness. I implemented robust error handling and data validation protocols to maintain system integrity. Another significant challenge was developing accurate weather prediction models with limited historical data, which I addressed by incorporating multiple environmental parameters and fine-tuning machine learning algorithms. Coordinating automated device control with weather predictions required careful calibration to balance energy efficiency with user comfort and safety.`,
+            impact: 'Successfully demonstrated the practical application of AI and IoT in environmental management and smart home automation. The system enhances sustainable living through improved energy efficiency, reduces manual device operation by over 90%, and provides accurate local weather forecasting for automated decision-making.',
             images: [
                 {
                     path: 'images/projects/ai-weather-iot/setup.jpg',
@@ -95,21 +128,24 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         'forest-fire-ai': {
             title: '🔥 Forest Fire Prediction AI Model',
-            overview: 'Advanced machine learning system designed to predict forest fire probability using environmental data analysis, supporting prevention and emergency response efforts.',
-            description: `This research project focuses on developing a sophisticated AI model that analyzes multiple environmental factors to predict forest fire risks with high accuracy. By processing data from temperature sensors, humidity monitors, wind speed measurements,and vegetation indices, the system provides early warning capabilities that can significantly improve forest fire prevention and response strategies.`,
+            overview: 'Application of machine learning in predicting forest fire risk based on weather data - A research project achieving 97.5% accuracy in fire occurrence prediction.',
+            description: `This research project focuses on developing and optimizing advanced machine learning models to predict forest fire risks based on comprehensive weather data analysis. Using the Algerian Forest Fires dataset from UCI Machine Learning Repository, I developed and fine-tuned Random Forest and XGBoost models that analyze multiple environmental factors to provide accurate fire occurrence predictions and Fire Weather Index (FWI) regression. The project applies extensive data science techniques including Pandas and NumPy for data processing, along with comprehensive exploratory data analysis (EDA) to isolate key weather factors that influence fire likelihood. The research culminates in a full-stack Flask-based web application deployed on Heroku, providing real-time risk forecasting and interactive data visualization to support prevention and emergency response efforts.`,
             features: [
-                'Multi-variable environmental data analysis including temperature, humidity, and wind patterns, etc',
+                'Random Forest and XGBoost models achieving 97.5% accuracy in fire occurrence prediction',
+                'Fire Weather Index (FWI) regression with 0.98 R² score',
+                'Comprehensive data processing using Pandas and NumPy',
+                'Extensive Exploratory Data Analysis (EDA) to identify key weather factors',
+                'Multi-variable environmental analysis (temperature, humidity, wind speed, etc.)',
+                'Full-stack Flask web application for real-time risk forecasting',
+                'Interactive data visualization and trend analysis dashboard',
+                'Heroku cloud deployment for accessible remote access',
                 'Historical fire data integration for improved prediction accuracy',
-                'Risk assessment mapping with geographical visualization capabilities',
-                'Real-time data processing from weather stations and environmental sensors',
-                'Integration with existing emergency response systems and protocols',
-                'Seasonal risk modeling accounting for climate change effects'
+                'Real-time weather data processing and risk assessment',
+                'User-friendly interface for inputting weather parameters and viewing predictions'
             ],
-            techStack: ['Python', 'Scikit-learn', 'Pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'Flask'],
-            challenges: `The most significant challenge was obtaining comprehensive training data that accurately represented diverse geographical and climatic conditions. I addressed this by combining multiple data sources including government weather databases and historical fire records. Another challenge involved balancing model sensitivity to minimize false positives while ensuring early detection of genuine fire risks, which required extensive hyperparameter tuning and cross-validation techniques.`,
-            impact: 'Achieved 97% prediction accuracy in testing phases, potential to reduce forest fire response time by 40%.',
-            liveDemo: '#',
-            github: '#',
+            techStack: ['Python', 'Random Forest', 'XGBoost', 'Scikit-learn', 'Pandas', 'NumPy', 'Flask', 'Heroku', 'Matplotlib', 'Seaborn', 'Machine Learning', 'Data Science', 'EDA'],
+            challenges: `The most significant challenge was obtaining and processing comprehensive training data from the Algerian Forest Fires dataset that accurately represented diverse geographical and climatic conditions. I addressed this through extensive data preprocessing and exploratory data analysis to understand data patterns and relationships. Another major challenge was optimizing model performance - balancing the Random Forest and XGBoost algorithms to achieve both high accuracy (97.5%) in classification and excellent R² score (0.98) in regression tasks. This required extensive hyperparameter tuning, cross-validation techniques, and careful feature engineering to isolate the most influential weather factors. Additionally, deploying a responsive Flask application on Heroku while maintaining real-time prediction capabilities required optimization of model loading and inference times.`,
+            impact: 'Achieved exceptional results with 97.5% accuracy in predicting fire occurrence and 0.98 R² score for Fire Weather Index regression. The deployed web application provides accessible, real-time forest fire risk assessment tools that can significantly improve prevention strategies and emergency response coordination. The research demonstrates the practical application of machine learning in environmental protection and disaster prevention.',
             images: [
                 {
                     path: 'images/projects/forest-fire-ai/main-web.png',
@@ -136,8 +172,6 @@ document.addEventListener('DOMContentLoaded', function() {
             techStack: ['HTML5', 'CSS3', 'JavaScript'],
             challenges: `Balancing visuals with performance; reduced initial animation delay and added image fallbacks.`,
             impact: 'Delivers a fast, engaging portfolio viewing experience across devices.',
-            liveDemo: '#',
-            github: 'https://github.com/ProPhuMy/Portfolio-web',
             images: [
                 { path: 'images/projects/personal-web/homepage.png', alt: 'Site preview 1', caption: 'Homepage layout' },
                 { path: 'images/projects/personal-web/project.png', alt: 'Site preview 2', caption: 'Projects modal' }
