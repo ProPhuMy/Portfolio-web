@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     caption: 'Complete system setup showing sensors, display, and connected devices'
                 },
                 {
-                    path: 'images/projects/ai-weather-iot/ui.png',
+                    path: 'images/projects/ai-weather-iot/ui.png?v=2025-10-23',
                     alt: 'Weather Dashboard Interface',
                     caption: 'Real-time weather data dashboard.'
                 }
