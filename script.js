@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="project-gallery">
                 ${project.images.map((image) => `
                     <div class="gallery-item">
-                        <img src="${image.path}" alt="${image.alt}" class="gallery-image" onerror="this.onerror=null;this.src='images/placeholder.svg';">
+                        <img src="${image.path}" alt="${image.alt}" class="gallery-image">
                         <p class="image-caption">${image.caption}</p>
                     </div>
                 `).join('')}
@@ -321,7 +321,7 @@ document.addEventListener('DOMContentLoaded', function() {
         imageModal.innerHTML = `
             <div class="image-modal-content">
                 <button class="image-modal-close">&times;</button>
-                <img src="${imagePath}" alt="${imageAlt}" class="fullsize-image" onerror="this.onerror=null;this.src='images/placeholder.svg';">
+                <img src="${imagePath}" alt="${imageAlt}" class="fullsize-image">
                 <p class="fullsize-caption">${imageAlt}</p>
             </div>
         `;
